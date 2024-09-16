@@ -12,7 +12,7 @@ import { AuthenticationContext } from '../context/AuthenticationContext';
 import logoImg from '../images/logo.png';
 import * as api from '../services/api';
 import { getFromCache, setInCache } from '../services/caching';
-import { User } from '../types/User';
+import { Users } from '../types/Users';
 import { isTokenExpired, sanitizeEmail, validateEmail } from '../utils';
 
 export default function Login({ navigation }: StackScreenProps<any>) {
@@ -28,20 +28,34 @@ export default function Login({ navigation }: StackScreenProps<any>) {
     const isFocused = useIsFocused();
 
     useEffect(() => {
-        getFromCache('userInfo').then(
-            (cachedUserInfo) => authenticationContext?.setValue(cachedUserInfo as User),
-            (error: any) => console.log(error)
-        );
-        getFromCache('accessToken').then(
-            (accessToken) => accessToken && !isTokenExpired(accessToken as string) && setAccessTokenIsValid(true),
-            (error: any) => console.log(error)
-        );
-        if (authError)
+        const checkCache = async () => {
+            try {
+                const cachedUserInfo = await getFromCache<Users>('userInfo');
+                const cachedAccessToken = await getFromCache<string>('accessToken');
+                
+                if (cachedUserInfo) {
+                    authenticationContext?.setValue(cachedUserInfo);
+                }
+                
+                if (cachedAccessToken && !isTokenExpired(cachedAccessToken)) {
+                    setAccessTokenIsValid(true);
+                }
+            } catch (error) {
+                console.log('Error fetching cache:', error);
+            }
+        };
+
+        checkCache();
+
+        if (authError) {
             Alert.alert('Authentication Error', authError, [{ text: 'Ok', onPress: () => setAuthError(undefined) }]);
+        }
     }, [authError]);
 
     useEffect(() => {
-        if (accessTokenIsValid && authenticationContext?.value) navigation.navigate('EventsMap');
+        if (accessTokenIsValid && authenticationContext?.value) {
+            navigation.navigate('EventsMap');
+        }
     }, [accessTokenIsValid]);
 
     const handleAuthentication = () => {
@@ -53,7 +67,6 @@ export default function Login({ navigation }: StackScreenProps<any>) {
                     setInCache('accessToken', response.data.accessToken);
                     authenticationContext?.setValue(response.data.user);
                     setIsAuthenticating(false);
-                    123;
                     navigation.navigate('EventsMap');
                 })
                 .catch((error) => {
