@@ -8,13 +8,13 @@ const { Navigator, Screen } = createStackNavigator();
 import Login from '../pages/Login';
 import EventsMap from '../pages/EventsMap';
 import { AuthenticationContext, AuthenticationContextObject } from '../context/AuthenticationContext';
-import { User } from '../types/User';
+import { Users } from '../types/Users';
 
 export default function Routes() {
-    const [authenticatedUser, setAuthenticatedUser] = useState<User>();
+    const [authenticatedUser, setAuthenticatedUser] = useState<Users>();
 
     const authenticationContextObj: AuthenticationContextObject = {
-        value: authenticatedUser as User,
+        value: authenticatedUser as Users,
         setValue: setAuthenticatedUser,
     };
 
