@@ -11,7 +11,7 @@ const api = axios.create({
     //
     // To use `my-json-server`, make sure your `db.json` is located at the repo root.
 
-    baseURL: 'http://192.168.137.68:3333',
+    baseURL: 'http://192.168.56.1:3333', // i changed the ipv4 address
 });
 
 export const authenticateUser = (email: string, password: string): Promise<AxiosResponse> => {
