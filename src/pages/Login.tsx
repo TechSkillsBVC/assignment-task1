@@ -1,5 +1,6 @@
 import { useIsFocused } from "@react-navigation/native";
 import { StackScreenProps } from "@react-navigation/stack";
+import { LinearGradient } from "expo-linear-gradient";
 import { StatusBar } from "expo-status-bar";
 import React, { useContext, useEffect, useState } from "react";
 import { Alert, Image, StyleSheet, Text, TextInput, View } from "react-native";
@@ -14,7 +15,7 @@ import { getFromCache, setInCache } from "../services/caching";
 import { User } from "../types/User";
 import { isTokenExpired, sanitizeEmail, validateEmail } from "../utils";
 
-export default function LoginPurple({ navigation }: StackScreenProps<any>) {
+export default function LoginBlue({ navigation }: StackScreenProps<any>) {
   const authenticationContext = useContext(AuthenticationContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -89,9 +90,15 @@ export default function LoginPurple({ navigation }: StackScreenProps<any>) {
   };
 
   return (
-    <View style={styles.container}>
+    <LinearGradient
+      start={{ x: 0.0, y: 0.0 }}
+      end={{ x: 1.0, y: 1.0 }}
+      colors={["#031A62", "#00A3FF"]}
+      style={styles.gradientContainer}
+    >
       {isFocused && <StatusBar animated translucent style="light" />}
       <KeyboardAwareScrollView
+        style={styles.container}
         contentContainerStyle={{
           padding: 24,
           flexGrow: 1,
@@ -129,23 +136,25 @@ export default function LoginPurple({ navigation }: StackScreenProps<any>) {
           style={{ marginBottom: 8 }}
           onPress={handleAuthentication}
           label="Log in"
-          color="#FF8700"
+          color="#FF8700" // keep original login button color
         />
         <Spinner
           visible={isAuthenticating}
           textContent={"Authenticating..."}
-          overlayColor="#8A2BE2BF"
+          overlayColor="#031A62BF"
           textStyle={styles.spinnerText}
         />
       </KeyboardAwareScrollView>
-    </View>
+    </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
+  gradientContainer: {
+    flex: 1,
+  },
   container: {
     flex: 1,
-    backgroundColor: "#6A0DAD", // purple background
   },
   logo: {
     width: 240,
