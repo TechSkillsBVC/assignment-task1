@@ -75,6 +75,24 @@ export default function Login({ navigation }: StackScreenProps<any>) {
     }
   };
 
+  const formIsValid = () => {
+    const emailIsValid = !isEmailInvalid();
+    const passwordIsValid = !isPasswordInvalid();
+    return emailIsValid && passwordIsValid;
+  };
+
+  const isPasswordInvalid = (): boolean => {
+    const invalidCheck = password.length < 6;
+    setPasswordIsInvalid(invalidCheck);
+    return invalidCheck ? true : false;
+  };
+
+  const isEmailInvalid = (): boolean => {
+    const invalidCheck = !validateEmail(email);
+    setEmailIsInvalid(invalidCheck);
+    return invalidCheck ? true : false;
+  };
+
   return (
     <LinearGradient
       start={{ x: 0.0, y: 0.0 }}
@@ -121,13 +139,20 @@ export default function Login({ navigation }: StackScreenProps<any>) {
           style={[styles.input, passwordIsInvalid && styles.invalid]}
           secureTextEntry={true}
           onChangeText={(value) => setPassword(value)}
+          onEndEditing={isPasswordInvalid}
         />
         <Spacer size={80} />
         <BigButton
           style={{ marginBottom: 8 }}
           onPress={handleAuthentication}
-          label="Log in"
+          label="Sign In"
           color="#FF8700"
+        />
+        <Spinner
+          visible={isAuthenticating}
+          textContent={"Authenticating..."}
+          overlayColor="#00000080"
+          textStyle={styles.spinnerText}
         />
       </KeyboardAwareScrollView>
     </LinearGradient>
