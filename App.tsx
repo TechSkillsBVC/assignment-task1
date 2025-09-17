@@ -12,7 +12,7 @@ import {
 import AppStack from './src/routes/AppStack';
 import { StatusBar } from 'expo-status-bar';
 
-export default function App() {
+export default function App(): any {
     const [fontsLoaded] = useFonts({
         Nunito_400Regular,
         Nunito_600SemiBold,
@@ -25,7 +25,7 @@ export default function App() {
     } else {
         return (
             <>
-                <StatusBar animated translucent style="dark" />
+                <StatusBar animated translucent style="Dark" />
                 <ActionSheetProvider>
                     <AppStack />
                 </ActionSheetProvider>
