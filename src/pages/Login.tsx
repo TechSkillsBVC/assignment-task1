@@ -133,7 +133,7 @@ export default function Login({ navigation }: StackScreenProps<any>) {
                     onEndEditing={isPasswordInvalid}
                 />
                 <Spacer size={80} />
-                <BigButton style={{ marginBottom: 8 }} onPress={handleAuthentication} label="Log in" color="#FF8700" />
+                <BigButton style={{ marginBottom: 8 }} onPress={handleAuthentication} label="Log in" color="#1E6FE0" />
                 <Spinner
                     visible={isAuthenticating}
                     textContent={'Authenticating...'}
