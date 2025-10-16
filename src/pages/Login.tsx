@@ -87,9 +87,9 @@ export default function Login({ navigation }: StackScreenProps<any>) {
 
     return (
         <LinearGradient
-            start={{ x: 0.0, y: 0.0 }}
-            end={{ x: 1.0, y: 1.0 }}
-            colors={['#031A62', '#00A3FF']}
+            start={{ x: 0.0, y: 0.6 }}
+            end={{ x: 0.0, y: 1.0}}
+            colors={['#0e422aff', '#1e2b202c']}
             style={styles.gradientContainer}
         >
             {isFocused && <StatusBar animated translucent style="light" />}
