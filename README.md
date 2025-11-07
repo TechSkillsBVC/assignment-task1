@@ -36,3 +36,4 @@ When creating your app build or publishing, import your secret values to EAS run
 ```
 eas secret:push
 ```
+- Assignment note added by Tam Nguyen on 2025-11-06
