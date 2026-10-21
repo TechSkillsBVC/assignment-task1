@@ -3,10 +3,21 @@ import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-const { Navigator, Screen } = createStackNavigator();
+export type RootStackParamList = {
+    Login: undefined;
+    EventsMap: undefined;
+    EventDetails: { id: string };
+    SelectEventLocation: undefined;
+    CreateEvent: { position: { latitude: number; longitude: number } };
+};
+
+const { Navigator, Screen } = createStackNavigator<RootStackParamList>();
 
 import Login from '../pages/Login';
 import EventsMap from '../pages/EventsMap';
+import EventDetails from '../pages/EventDetails';
+import SelectEventLocation from '../pages/SelectEventLocation';
+import CreateEvent from '../pages/CreateEvent';
 import { AuthenticationContext, AuthenticationContextObject } from '../context/AuthenticationContext';
 import { User } from '../types/User';
 
@@ -30,6 +41,12 @@ export default function Routes() {
                     <Screen name="Login" component={Login} />
 
                     <Screen name="EventsMap" component={EventsMap} />
+
+                    <Screen name="EventDetails" component={EventDetails} />
+
+                    <Screen name="SelectEventLocation" component={SelectEventLocation} />
+
+                    <Screen name="CreateEvent" component={CreateEvent} />
                 </Navigator>
             </NavigationContainer>
         </AuthenticationContext.Provider>

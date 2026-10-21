@@ -92,7 +92,7 @@ export default function Login({ navigation }: StackScreenProps<any>) {
             colors={['#031A62', '#00A3FF']}
             style={styles.gradientContainer}
         >
-            {isFocused && <StatusBar animated translucent style="light" />}
+            {isFocused && <StatusBar animated style="light" />}
             <KeyboardAwareScrollView
                 style={styles.container}
                 contentContainerStyle={{
@@ -133,7 +133,7 @@ export default function Login({ navigation }: StackScreenProps<any>) {
                     onEndEditing={isPasswordInvalid}
                 />
                 <Spacer size={80} />
-                <BigButton style={{ marginBottom: 8 }} onPress={handleAuthentication} label="Log in" color="#FF8700" />
+                <BigButton style={{ marginBottom: 8, borderRadius: 8 }} onPress={handleAuthentication} label="Log in" color="#FF8700" />
                 <Spinner
                     visible={isAuthenticating}
                     textContent={'Authenticating...'}

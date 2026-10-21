@@ -7,11 +7,6 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     version: '1.0.0',
     orientation: 'portrait',
     icon: './assets/icon.png',
-    splash: {
-        image: './assets/splash.png',
-        resizeMode: 'cover',
-        backgroundColor: '#031A62',
-    },
     updates: {
         fallbackToCacheTimeout: 0,
     },
@@ -24,6 +19,17 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     },
     plugins: [
         [
+            'expo-splash-screen',
+            {
+                image: './assets/splash.png',
+                resizeMode: 'cover',
+                backgroundColor: '#031A62',
+            },
+        ],
+        '@react-native-community/datetimepicker',
+        'expo-font',
+        'expo-status-bar',
+        [
             'expo-image-picker',
             {
                 photosPermission: 'The app accesses your photos to let you add them to events.',
@@ -35,6 +41,6 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
         eas: {
             projectId: '954f3b8e-1155-4f8f-8601-a2b3126da39e',
         },
-        IMGBB_API_KEY: process.env.IMGBB_API_KEY,
+        FREEIMAGE_API_KEY: process.env.FREEIMAGE_API_KEY,
     },
 });
